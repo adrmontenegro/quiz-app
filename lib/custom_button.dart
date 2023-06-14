@@ -12,9 +12,13 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return ElevatedButton(
+    return OutlinedButton.icon(
       onPressed: onPressed, 
-      child: text);
+      style: OutlinedButton.styleFrom(
+        backgroundColor: Colors.deepPurple
+      ),
+      icon: const Icon(Icons.arrow_right_alt),
+      label: text);
   }
    
 }
