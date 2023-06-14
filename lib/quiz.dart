@@ -51,7 +51,7 @@ class _QuizState extends State<Quiz> {
             : ElevatedButton.icon(
                 onPressed: switchScreen,
                 icon: const Icon(Icons.arrow_back_rounded),
-                label: const StyledText.button(text: "Back")),
+                label: const StyledText.button(text: "Back"),),
         body: GradientContainer.home(content: screenWidget),
       ),
     );
