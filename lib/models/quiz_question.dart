@@ -3,4 +3,10 @@ class QuizQuestion {
 
   final String question;
   final List<String> options;
+
+  List<String> getShuffledOptions(){
+    List<String> optionsCopy = List.of(options);
+    optionsCopy.shuffle();
+    return optionsCopy;
+  }
 }

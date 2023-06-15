@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/models/quiz_question.dart';
 import 'package:quiz_app/styled_text.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -12,20 +14,42 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  String question = "What are you doing?";
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+      } else {
+        currentQuestionIndex = 0;
+      }
+    });
+  }
 
   @override
   Widget build(context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          StyledText.title(text: question),
-          const SizedBox(height: 50),
-          AnswerButton(label: "option 1", onPressed: () {}),
-          AnswerButton(label: "option 2", onPressed: () {}),
-          AnswerButton(label: "option 3", onPressed: () {}),
-        ],
+    QuizQuestion question = questions[currentQuestionIndex];
+
+    return SizedBox(
+      width: double.infinity,
+      child: Container(
+        margin: const EdgeInsets.all(45),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              StyledText.title(text: question.question),
+              const SizedBox(height: 50),
+
+              //Mapping options using "spreading"('...' prexif)
+              ...question
+                  .getShuffledOptions()
+                  .map((o) => AnswerButton(label: o, onPressed: answerQuestion))
+
+              // Mapping options using for cicle
+              // for (int i = 0; i < question.options.length; i++)
+              //   AnswerButton(label: question.options[i], onPressed: () {}),
+            ]),
       ),
     );
   }
