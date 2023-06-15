@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const TextStyle title =
     TextStyle(color: Colors.white, 
@@ -8,6 +9,13 @@ const TextStyle title =
 const TextStyle button =
     TextStyle(color: Colors.white,  
     fontSize: 15);
+
+TextStyle question =
+    GoogleFonts.kanit(
+      color: Colors.white,
+      fontSize: 25,
+      fontWeight: FontWeight.bold
+    );
 
 class StyledText extends StatelessWidget {
   const StyledText(
@@ -23,6 +31,10 @@ class StyledText extends StatelessWidget {
   const StyledText.button({required this.text, super.key})
       : color = Colors.white,
         style = button;
+
+  StyledText.question({required this.text, super.key})
+      : color = Colors.white,
+        style = question;
 
   final String text;
   final Color color;

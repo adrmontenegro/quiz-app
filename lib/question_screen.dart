@@ -38,7 +38,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              StyledText.title(text: question.question),
+              StyledText.question(text: question.question),
               const SizedBox(height: 50),
 
               //Mapping options using "spreading"('...' prexif)
