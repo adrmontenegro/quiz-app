@@ -19,7 +19,7 @@ class QuestionResult extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(

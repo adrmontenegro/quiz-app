@@ -10,7 +10,7 @@ class ResultSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 450,
       child: SingleChildScrollView(
         child: Column(
           children: answeredQuestions.map((data) {

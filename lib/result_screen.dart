@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/custom_button.dart';
 import 'package:quiz_app/models/answered_question.dart';
 import 'package:quiz_app/models/quiz_question.dart';
-import 'package:quiz_app/question_result.dart';
 import 'package:quiz_app/result_summary.dart';
 import 'package:quiz_app/styled_text.dart';
 import 'package:quiz_app/data/questions.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({required this.answers, super.key});
+  const ResultScreen(
+      {required this.answers, required this.restartFunction, super.key});
 
   final List<String> answers;
+  final void Function() restartFunction;
 
   List<AnsweredQuestion> summarizeAnswers() {
     List<AnsweredQuestion> summary = [];
@@ -38,7 +39,8 @@ class ResultScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               StyledText.title(
-                  text: "You answered $score out of ${questions.length} questions correctly!"),
+                  text:
+                      "You answered $score out of ${questions.length} questions correctly!"),
               const SizedBox(
                 height: 30,
               ),
@@ -50,8 +52,9 @@ class ResultScreen extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              CustomButton(
-                  onPressed: () {},
+              CustomButton.leftIcon(
+                  icon: const Icon(Icons.restart_alt),
+                  onPressed: restartFunction,
                   text: const StyledText.button(text: "Restart Quiz...")),
             ],
           ),
