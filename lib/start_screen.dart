@@ -23,7 +23,7 @@ class StartScreen extends StatelessWidget {
               color: const Color.fromARGB(143, 255, 255, 255),
             ),
         const SizedBox(height: 50),
-        const StyledText.title(text: title),
+        StyledText.title(text: title),
         const SizedBox(height: 50),
         CustomButton(
             onPressed: startQuizFunction,

@@ -7,12 +7,12 @@ class AnswerButton extends StatelessWidget {
   const AnswerButton({required this.label, required this.onPressed, super.key});
 
   final String label;
-  final void Function() onPressed;
+  final void Function(String answer) onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: onPressed,
+      onPressed: () {onPressed(label);},
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

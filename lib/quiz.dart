@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/gradient_container.dart';
 import 'package:quiz_app/question_screen.dart';
+import 'package:quiz_app/result_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 import 'package:quiz_app/styled_text.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class Quiz extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  List<String> selectedAnswers = [];
   var activeScreen = "start-screen";
 
   // If [activeScreen] was a Widget variable, this could be used to initialize
@@ -31,12 +34,31 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (questions.length == selectedAnswers.length) {
+      setState(() {
+        //selectedAnswers = [];
+        activeScreen = "result-screen";
+      });
+    }
+  }
+
   @override
   Widget build(context) {
-    Widget screenWidget = StartScreen(switchScreen);
+    Widget screenWidget;
 
-    if (activeScreen == "question-screen") {
-      screenWidget = const QuestionScreen();
+    switch (activeScreen) {
+      case "question-screen":
+        screenWidget = QuestionScreen(
+          onSelectAnswer: chooseAnswer,
+        );
+        break;
+      case "result-screen":
+        screenWidget = ResultScreen(answers: selectedAnswers,);
+        break;
+      default:
+        screenWidget = StartScreen(switchScreen);
     }
 
     // Here we can modify the [screenWidget] using a ternary operation
@@ -46,12 +68,13 @@ class _QuizState extends State<Quiz> {
 
     return MaterialApp(
       home: Scaffold(
-        floatingActionButton: activeScreen == "start-screen"
-            ? null
-            : ElevatedButton.icon(
+        floatingActionButton: activeScreen == "question-screen"
+            ? ElevatedButton.icon(
                 onPressed: switchScreen,
                 icon: const Icon(Icons.arrow_back_rounded),
-                label: const StyledText.button(text: "Back"),),
+                label: const StyledText.button(text: "Back"),
+              )
+            : null,
         body: GradientContainer.home(content: screenWidget),
       ),
     );
