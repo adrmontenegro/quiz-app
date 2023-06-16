@@ -18,14 +18,15 @@ class StartScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-              logoAsset,
-              width: 250,
-              color: const Color.fromARGB(143, 255, 255, 255),
-            ),
+          logoAsset,
+          width: 250,
+          color: const Color.fromARGB(143, 255, 255, 255),
+        ),
         const SizedBox(height: 50),
-        const StyledText.title(text: title),
+        StyledText.title(text: title),
         const SizedBox(height: 50),
-        CustomButton(
+        CustomButton.rightIcon(
+            icon: const Icon(Icons.arrow_right_alt),
             onPressed: startQuizFunction,
             text: const StyledText.button(text: "Start Quiz"))
       ],
